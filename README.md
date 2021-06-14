@@ -54,6 +54,14 @@ you can use darknet2pytorch to convert it yourself, or download my converted mod
     - yolov4.pth(https://drive.google.com/open?id=1wv_LiFeCRYwtpkqREPeI13-gPELBDwuJ)
     - yolov4.conv.137.pth(https://drive.google.com/open?id=1fcbR0bWzYfIEdLJPzOsn4R5mlvR6IQyA)
 
+# Berkeley Dataset Preparation
+1. Transform BDD100K json file format to COCO format using bdd2coco.py 
+2. Transform COCO format to a new format for training with yolov4 --> txt file
+3. Make your own config file for training a new dataset: change the number of filters and the number of classes
+    https://github.com/kiyoshiiriemon/yolov4_darknet
+    
+    
+
 # 1. Train
 
 [use yolov4 to train your own data](Use_yolov4_to_train_your_own_data.md)
@@ -69,6 +77,7 @@ you can use darknet2pytorch to convert it yourself, or download my converted mod
     ...
     ...
     ```
+    
 3. Train
 
     you can set parameters in cfg.py.
@@ -242,6 +251,12 @@ python demo_trt.py <tensorRT_engine_file> <input_image> <input_H> <input_W>
 - Note1: input_H and input_W should agree with the input size in the original ONNX file.
     
 - Note2: extra NMS operations are needed for the tensorRT output. This demo uses python NMS code from `tool/utils.py`.
+
+# Demo of our project: Yolov4 + BDD + Lane detection
+
+python3 models.py 8 ./checkpoints/best_models.pth ./data 416 416
+You can change class number and image size.
+ 
 
 
 # 6. ONNX2Tensorflow
